@@ -1,0 +1,168 @@
+{% extends 'reception/check_in.html/' %}
+{% block add_styles %}
+<style>
+    .reception{
+      width: 100px;
+      cursor:pointer;
+      color:white
+    }
+    .tab button{
+      cursor: pointer;
+    }
+    .pt button{
+        background-color: ghostwhite;
+        padding: 0%;
+        border-top-width:0px;
+        border-right-width:0px;
+        border-left-width:0px;
+        border-bottom: 0px;
+        outline: none;
+        cursor: pointer;
+        width:100%;
+        height:50px;
+        border:1px solid grey;
+        border-right:none;
+        border-top:none;
+
+        }
+    .pt button:hover{
+        background-color:#DFEEF6;
+        height:50px;
+    }
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+      }
+    th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    .tel {
+        display: none;
+        width: 100vw;
+      }
+    .pc {
+        display: flex;
+        width: 100vw;
+      }
+  
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: ghostwhite;
+        font-family: Arial; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display : flex;
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tel {
+          display: block;
+          margin:0%;
+          width: 100vw;
+        }
+        .pc {
+          display: none;
+          width: 100vw;
+        }
+        table, th, td {
+          border: 1px solid grey;
+          border-collapse: collapse;
+        }
+        th, td {
+          padding: 5px;
+          text-align: left;
+        }
+        #checkin{
+            width: 50%;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4%;
+            box-sizing: border-box;
+            background-color:#477C9E;
+            color:white;
+            padding: 12px 20px;
+            margin-left:25%;
+            margin-top:3%
+    
+        }
+    }
+  </style>
+{% endblock %}
+
+
+
+{% block content_g %}
+<div>
+    {% for idd in id_patient %}
+    <a href="{% url 'patient_info'  idd.id  %}">
+        <button>
+            <h3>{{idd.first_name}} {{idd.last_name}}</h3>
+        </button></a>
+    <!--a href="/chekedin/{{ idd.id }}"><button type="submit">check in</button></a-->
+    {% endfor %}
+</div>
+{% endblock %}
+
+
+
+{% block content_d %}
+<table id="patient" style="width:50%;margin:15%">
+    <tr>
+      <th>Nom:</th>
+      <td>{{patient.first.last_name}}</td>
+    </tr>
+    <tr>
+      <th>Prénom:</th>
+      <td>{{patient.first.first_name}}</td>
+    </tr>
+    <tr>
+      <th>CIN:</th>
+      <td>{{patient.first.CIN}}</td>
+    </tr>
+    <tr>
+    <th>Date de naissance:</th>
+    <td>{{patient.first.date_of_birth}}</td>
+    </tr>
+    <tr>
+      <th>id patient:</th>
+      <td>{{id_crypte}}</td>
+      </tr>
+</table>
+<a href="{% url 'chekedin'  patient.first.id  %}"><button type="submit" style="background-color:#477C9E;color:white;float:right;margin-right:35%;cursor:pointer;">check in</button></a>
+
+{% endblock %}
+
+{% block content %}
+<div style="background-color: #477C9E;height:100%;flex-basis:100%">
+  <a href="{% url 'reception' %}"><span style='font-size:50px;float:left;margin-top:0%;color:black'>&#8592;</span></a>        
+  <div style="text-align: center;; padding-top:5%;padding-bottom:5%;letter-spacing: 10;">
+  <h1>{{patient.first.first_name}} {{patient.first.last_name}}</h1>
+  </div>
+  <div style="background-color: white;flex-basis:100%;border-radius:50px 50px 0px 0px;height:100%">
+      <h2 style="color:grey;margin-left:20%;">Fiche du patient</h2>
+      <table id="patient" style="width:70%;margin-left:10%;">
+        <tr>
+          <th>Nom:</th>
+          <td>{{patient.first.last_name}}</td>
+        </tr>
+        <tr>
+          <th>Prénom:</th>
+          <td>{{patient.first.first_name}}</td>
+        </tr>
+        <tr>
+          <th>CIN:</th>
+          <td>{{patient.first.CIN}}</td>
+        </tr>
+        <tr>
+        <th>Date de naissance:</th>
+        <td>{{patient.first.date_of_birth}}</td>
+        </tr>
+    </table>
+    <a href="{% url 'chekedin'  patient.first.id  %}">
+    <input type="submit" id="checkin" value="Check in"></a>
+  </div>
+  </div>
+{% endblock %}

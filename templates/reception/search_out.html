@@ -1,0 +1,162 @@
+
+{% extends 'reception/checkout.html' %}
+
+{% block add_styles %}
+<style>
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    .checkout{
+        background-color:#477C9E;
+        color:white;
+        float:right;
+        margin-right:35%;
+        cursor:pointer;
+    }
+    .tel {
+      display: none;
+      width: 100vw;
+    }
+    .pc {
+      display: flex;
+      width: 100vw;
+    }
+
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: ghostwhite;
+        font-family: Arial; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display : flex;
+     }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tel {
+          display: block;
+          width: 100vw;
+        }
+        .pc {
+          display: none;
+          width: 100vw;
+        }
+        #nom_patient{
+          width: 90%;
+          display: inline-block;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+          margin-top:30%;
+          padding: 12px 20px;
+          margin-left:5%;
+          margin-bottom:10%
+      }
+      #rechercher{
+          width: 50%;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4%;
+          box-sizing: border-box;
+          background-color:#477C9E;
+          color:white;
+          padding: 12px 20px;
+          margin-left:25%;
+  
+      }
+      }
+
+</style>
+{% endblock %}
+{% block content_g %}
+    {% if id_patient %}
+    <div>
+        {% for idd in id_patient %}
+        <a href="patient_info_p/{{ idd.patient.id }}">
+            <button>
+                <h3>{{idd.patient.first_name}} {{idd.patient.last_name}}</h3>
+            </button></a>
+        {% endfor %}
+    </div>
+    {% else %}
+        <!--{% if choix == "1" %}
+        <a href="/recherche_recep2/{{ 1 }}"><button><h3>Recherche par id</h3></button></a>
+        <a href="/recherche_recep2/{{ 2 }}"><button><h3>Recherche par nom</h3></button></a>
+        <a href="/recherche_recep2/{{ 3 }}"><button><h3>Recherche par CIN</h3></button></a>
+        {% elif choix == "2" %}
+        <a href="/recherche_recep2/{{ 1 }}"><button><h3>Recherche par id</h3></button></a>
+        <a href="/recherche_recep2/{{ 2 }}"><button><h3>Recherche par nom</h3></button></a>
+        <a href="/recherche_recep2/{{ 3 }}"><button><h3>Recherche par CIN</h3></button></a>
+        {% elif choix == "3" %}
+        <a href="/recherche_recep2/{{ 1 }}"><button><h3>Recherche par id</h3></button></a>
+        <a href="/recherche_recep2/{{ 2 }}"><button><h3>Recherche par nom</h3></button></a>
+        <a href="/recherche_recep2/{{ 3 }}"><button><h3>Recherche par CIN</h3></button></a>
+        {% endif %}-->
+        <a href="/recherche_recep2/{{ 1 }}"><button><h3>Recherche par id</h3></button></a>
+        <a href="/recherche_recep2/{{ 2 }}"><button><h3>Recherche par nom</h3></button></a>
+        <a href="/recherche_recep2/{{ 3 }}"><button><h3>Recherche par CIN</h3></button></a>
+    {% endif %}
+{% endblock %}
+{% block content_d %}
+    <div style='border:1px solid grey;margin-top:10%;margin-left:10%;margin-right:10%'> 
+        {% if choix == "1" %}
+        <form method="POST" >
+            {% csrf_token %}
+            <input name="text"class="id_patient" id="idpatient" name="idpatient"  placeholder="Ecrire l'ID du patient">
+            <span class="validity"></span>
+            <input type="submit" id="rechercherid" value="Rechercher" >
+        </form>
+        {% elif choix == "2" %}
+        <form method="POST" >
+            {% csrf_token %}
+            <input name="text2"class="id_patient" id="idpatient" name="idpatient"  placeholder="Ecrire le nom du patient">
+            <span class="validity"></span>
+            <input type="submit" id="recherchernom" value="Rechercher" >
+        </form>
+        {% elif choix == "3" %}
+        <form method="POST" >
+            {% csrf_token %}
+            <input name="text3"class="id_patient" id="idpatient" name="idpatient"  placeholder="Ecrire la CIN du patient">
+            <span class="validity"></span>
+            <input type="submit" id="rechercherid" value="Rechercher" >
+        </form>
+        {% endif %}
+    </div>
+    <h3>{{ warning }}</h3>
+
+{% endblock %}
+
+{% block content %}
+<div style="background-color: #477C9E;height:100%;flex-basis:100%">
+    <a href="{% url 'checkout' %}"><span style='font-size:50px;float:left;margin-top:0%;color:black'>&#8592;</span></a>        
+    <div style="text-align: center;padding-top:5%;padding-bottom:5%;letter-spacing: 10;">
+    <h1>Rechercher un patient</h1>
+    </div>
+    <div style="background-color: white;flex-basis:100%;border-radius:50px 50px 0px 0px;height:100%">
+        {% if choix == "1" %}    
+        <form method="POST" >
+                {% csrf_token %}
+                <input type="text" class="nom_patient" id="nom_patient" name="text" placeholder="Ecrire l'ID du patient">
+                <input type="submit" id="rechercher" value="Rechercher" ></a>
+            </form>
+        {% elif choix == "2" %}    
+        <form method="POST" >
+                {% csrf_token %}
+                <input type="text" class="nom_patient" id="nom_patient" name="text2" placeholder="Ecrire le nom du patient">
+                <input type="submit" id="rechercher" value="Rechercher" ></a>
+            </form>
+        {% elif choix == "3" %}    
+        <form method="POST" >
+                {% csrf_token %}
+                <input type="text" class="nom_patient" id="nom_patient" name="text3" placeholder="Ecrire la CIN du patient">
+                <input type="submit" id="rechercher" value="Rechercher" ></a>
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

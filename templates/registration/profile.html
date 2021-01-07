@@ -1,0 +1,142 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block styles %}
+   <style>
+    table, th, td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .tel {
+      display: none;
+      width: 100vw;
+    }
+    .pc {
+      display: flex;
+      width: 100vw;
+    }
+
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: ghostwhite;
+        font-family: Arial; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display : flex;
+     }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tel {
+          display: block;
+          width: 100vw;
+        }
+        .pc {
+          display: none;
+          width: 100vw;
+        }
+      }
+   </style>
+  {% endblock %}
+   {% block content_g %}
+          <div style="margin-top:20%">
+          <img src="{{medecin.image.url}}" style="width: 50%;height: 30%;border-radius: 50%;" alt="profile">
+         <h1>{{medecin.user.first_name}} {{medecin.user.last_name}}</h1>
+        </div>
+    {% endblock %}
+
+    {% block content_d %}
+    <a href="{% url 'logout_url' %}">
+    <i class="fa fa-sign-out" style="font-size:40px;color:black;float:right;margin-right:3%"></i></a>
+    <div  style="margin-top:10%">
+    <h2 style="text-align:left;color:grey;margin-left:2%">A propos de moi</h2>
+    <table id="patient" style="width:70%;margin-left:3%">
+      <tr>
+        <th>Nom:</th>
+        <td>{{medecin.user.last_name}}</td>
+      </tr>
+      <tr>
+        <th>Prénom:</th>
+        <td>{{medecin.user.first_name}}</td>
+      </tr>
+      <tr>
+        <th>Spécialité:</th>
+        <td>{{medecin.specialitee}}</td>
+      </tr>
+      
+  </table>
+  <h2 style="text-align:left;color:grey;margin-left:2%">Contactez moi</h2>
+  <table id="patient" style="width:70%;margin-left:3%">
+    <tr>
+      <th>Adresse électronique:</th>
+      <td>{{medecin.email}}</td>
+    </tr>
+    <tr>
+      <th>Téléphone:</th>
+      <td>{{medecin.numero}}</td>
+    </tr>
+</table>
+  <h2 style="text-align:left;color:grey;margin-left:2%">Parcours Académique</h2>
+  <table id="patient" style="width:70%;margin-left:3%">
+    <tr>
+      <th>{{medecin.parcours}}</th>
+    </tr>
+</table>
+</div>
+{% endblock %}
+
+{% block content %}
+<div style="background-color:#477C9E;height:100%">
+  <a href='/dashboard'><span style='font-size:50px;float:left;margin-top:0%;color:black'>&#8592;</span></a>
+  <a href="{% url 'logout_url' %}">
+    <i class="fa fa-sign-out" style="font-size:50px;color:black;float:right;margin-right:3%;margin-top:0%"></i></a>
+  <div style="text-align: center;padding-top:5%;padding-bottom:5%;letter-spacing: 10;">
+  <h1 >Mon profil</h1>
+  </div>
+  <div style="background-color: white;flex-basis:100%;border-radius:50px 50px 0px 0px;height:100%;text-align: -webkit-center;">
+    <img src="{{medecin.image.url}}" style="margin:5%;width: 50%;height: auto;border-radius: 50%;">
+    <h2 style="color:grey;">A propos de moi</h2>
+    <table id="patient" style="width:70%;">
+    <tr>
+      <th>Nom:</th>
+      <td>{{medecin.user.last_name}}</td>
+    </tr>
+    <tr>
+      <th>Prénom:</th>
+      <td>{{medecin.user.first_name}}</td>
+    </tr>
+    <tr>
+      <th>Spécialité:</th>
+      <td>{{medecin.specialitee}}</td>
+    </tr>
+    </table>
+    <h2 style="color:grey;">Contactez moi</h2>
+    <table id="patient" style="width:70%;">
+    <tr>
+    <th>Adresse électronique:</th>
+    <td>{{medecin.email}}</td>
+    </tr>
+    <tr>
+    <th>Téléphone:</th>
+    <td>{{medecin.numero}}</td>
+    </tr>
+    </table>
+    <h2 style="color:grey;">Parcours Académique</h2>
+    <table id="patient" style="width:70%;">
+      <tr>
+        <th>{{medecin.parcours}}</th>
+      </tr>
+    </table>
+  </div> 
+</div> 
+{% endblock %}
+
+       
+
+               
+            
+   

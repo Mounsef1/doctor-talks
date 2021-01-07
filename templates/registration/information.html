@@ -1,0 +1,168 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block styles %}
+<style>
+  table, th, td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+
+  .tel {
+  display: none;
+  width: 100vw;
+  }
+  .pc {
+  display: flex;
+  width: 100vw;
+  }
+
+  @media only screen and (min-width: 768px) {
+  body {
+    background-color: ghostwhite;
+    font-family: Arial; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display : flex;
+  }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .tel {
+      display: block;
+      width: 100vw;
+    }
+    .pc {
+      display: none;
+      width: 100vw;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content_g %}
+    <div style="background-color:white;color:#477C9E;border-bottom:1px solid grey;margin:0%">
+      <h3 style="margin:0%;padding:3%">Mes patients</h3>
+    </div>
+    <div class="pt"> 
+        {% for salle in salle_dattente %}
+        {% if salle.doctor.user.username == user.username and salle.active_case == True %}
+        {% if salle.id == nbr %}
+        <a href="/patient/{{ salle }}/information">
+          <button style="width:100%;background-color:#DFEEF6;" >
+            <h3>{{salle.malade.first_name }} {{salle.malade.last_name}}</h3>
+        </button></a>
+        <hr style='margin:0%'>
+        {% else %}
+        <a href="/patient/{{ salle }}/information">
+          <button style="width:100%;background-color:ghostwhite;">
+          <h3>{{salle.malade.first_name }} {{salle.malade.last_name}}</h3>
+       </button></a>
+       <hr style='margin:0%'>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>  
+{% endblock %}
+
+
+{% block content_d %}
+    <div class="vide1">
+        <div class="settingsP">
+          <a href="/patient/{{ nbr }}" style="margin-right:20%" ><img src="{% static 'images\icons8-temps-100@2x.png' %}" alt="passage"></a>
+          <a href="#" ><img src="{% static 'images\information.png' %}" alt="informations"></a>
+        </div>
+    </div>
+    <table id="patient" style="width:50%;margin-top:5%;margin-left:25%">
+        <tr>
+          <th>Nom:</th>
+          <td>{{Pat.last_name}}</td>
+        </tr>
+        <tr>
+          <th>Prénom:</th>
+          <td>{{Pat.first_name}}</td>
+        </tr>
+        <tr>
+          <th>CIN:</th>
+          <td>{{Pat.CIN}}</td>
+        </tr>
+        <tr>
+        <th>Date de naissance:</th>
+        <td>{{Pat.date_of_birth}}</td>
+        </tr>
+    </table>
+    <div class="documents" style="margin-top:5%;">
+        
+        {% for fichier in dossier %}
+            <a href="{{fichier.fichier.url}}" download>
+            <i class="fa fa-file-o" style="font-size:36px;margin-right:5%;color: black;">
+            <p style="font-size:20px">{{fichier.titre}}</p></i></a>
+            {% endfor %}
+    </div>
+    <form method="POST" enctype="multipart/form-data" class="documents">
+        {% csrf_token %}
+        <input type="text" name="titre" required size="30" placeholder="Titre du fichier" style="float:left;margin-left:3%;background-color:ghostwhite;width:40%;margin-top:5%;">
+        <input type="file" name="fichier" style="color:white; background-color:#477C9E; cursor:pointer;width:20%;margin-top:5%;">
+        <input type="submit" value="Charger le document" style="float:right;margin-top:5%;color:white; background-color:#477C9E; cursor:pointer;width:20%;margin-right:10%" >
+    </form>
+{% endblock %}
+
+{% block content %}
+<div style="background-color:#477C9E;height:100%">
+  <a href="/dashboard">
+    <span style='font-size:50px;float:left;margin-top:0%;color:black'>&#8592;</span>
+  </a>
+<div style="text-align: center;padding-top:5%;padding-bottom:5%;letter-spacing: 10;">
+<h1>Mon patient</h1>
+</div>
+<div style="background-color: white;flex-basis:100%;border-radius:50px 50px 0px 0px;height:100%;">
+  <div class="settingsP" style="height:100%">
+    <a href="/patient/{{ nbr }}" style="float:left; margin-left:10%;margin-top:19%;">
+      <img src="{% static 'images\icons8-temps-100@2x.png' %}" alt="passage" style="height:70px;width:70px;">
+    </a>
+    <a href="#" style="float:right; margin-right:10%;margin-top:20%">
+      <img src="{% static 'images\information.png' %}" alt="info">
+    </a>
+    <table id="patient" style="width:50%;margin-left:25%;margin-top:50%">
+          <tr>
+            <th>Nom:</th>
+            <td>{{Pat.last_name}}</td>
+          </tr>
+          <tr>
+            <th>Prénom:</th>
+            <td>{{Pat.first_name}}</td>
+          </tr>
+          <tr>
+            <th>CIN:</th>
+            <td>{{Pat.CIN}}</td>
+          </tr>
+          <tr>
+          <th>Date de naissance:</th>
+          <td>{{Pat.date_of_birth}}</td>
+          </tr>
+      </table>
+      <div>
+        <div class="documents" style="margin-top:5%;text-align: -webkit-center">
+          {% for fichier in dossier %}
+            <a style="text-align-last: center;" href="{{fichier.fichier.url}}" download>
+            <i class="fa fa-file-o" style="font-size:20px;margin-right:5%;color: black;">
+            <p style="font-size:20px">{{fichier.titre}}</p></i></a>
+            {% endfor %}
+        </div>
+        <div class="documents">
+          <form method="POST" enctype="multipart/form-data" class="documents" style="text-align: -webkit-center;">
+            {% csrf_token %}
+            <input type="text" name="titre" required size="30" placeholder="Titre du fichier" style="background-color:ghostwhite;width:40%;margin-top:5%;margin-right:5%;">
+            <input type="file" name="fichier" style="color:white; background-color:#477C9E; cursor:pointer;margin-top:5%;width:40%;">
+            <input type="submit" value="Charger le document" style="margin-top:5%;color:white; background-color:#477C9E; cursor:pointer;" >
+          </form>
+        </div>
+    </div>
+  </div> 
+</div> 
+</div>  
+{% endblock %}

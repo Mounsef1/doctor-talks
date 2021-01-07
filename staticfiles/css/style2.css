@@ -1,0 +1,214 @@
+html{
+    height:-webkit-fill-available;
+}
+
+body {
+    background-color: ghostwhite;
+    font-family: Arial; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display : flex;
+ }
+
+.settings img{
+    width: 10%;
+    height: 50px;
+}
+.settingsP img {
+    width: 50px;
+    height: 50px;
+}
+.div1{
+    display: inline-block;
+    text-align: center;
+    flex-basis: 50%;
+}
+.vertical { 
+    border-left: 3px solid Grey; 
+    height: 100%; 
+    position:absolute; 
+    left: 34%; 
+} 
+  
+.button{
+    background-color:#477C9E;
+    color: white;
+    margin-left:0%;
+    margin-top:0%;
+}
+.div2 button:hover{
+   cursor:pointer;
+}
+.settings{
+    background-color:#477C9E;
+    padding-bottom:3%;
+}
+
+.settingsP{
+    padding-top: 5%;
+    border-bottom: 1px solid Grey;
+    padding-bottom:3.9%;
+}
+#passages{
+        font-family: Arial,Arial,Arial;
+        border-collapse: collapse;
+}
+#passages td, #passages th {
+    border: 2px solid #ddd;
+    padding: 8px; 
+  }
+#passages th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #477C9E;
+    color: white;
+}
+#deconnexion{
+    width: 20%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4%;
+    box-sizing: border-box;
+    margin-top:5%;
+    margin-bottom:10%;
+    background-color:#477C9E;
+    color:white;}
+
+    .patient_select{
+        width:100%;
+        border-left:none;
+        border-top:none;
+        border-bottom:none;
+        border-right:none;
+        cursor:pointer;
+    }
+ 
+    #nompatient{
+        width: 90%;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-top: 10%;
+    }
+    #recherchernom{
+        width: 20%;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4%;
+        box-sizing: border-box;
+        margin-top:5%;
+        margin-bottom:10%;
+        background-color:#477C9E;
+        color:white;
+        cursor:pointer;
+    }
+    .reception{
+      width: 100px;
+      cursor:pointer;
+      color:white;
+    }
+  
+    #idpatient{
+        width: 90%;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin-top: 10%;
+    }
+    #rechercherid{
+        width: 20%;
+        padding: 12px 20px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4%;
+        box-sizing: border-box;
+        margin-top:5%;
+        margin-bottom:10%;
+        background-color:#477C9E;
+        color:white;
+        cursor:pointer;
+    }
+    .reception{
+      width: 100px;
+      cursor:pointer;
+      color:white;
+    }
+
+    #Ajouter{
+        width: 20%;
+        padding: 12px 10px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4%;
+        box-sizing: border-box;
+        margin-top:5%;
+        margin-bottom:10%;
+        background-color:#477C9E;
+        color:white;
+        cursor:pointer;
+    }
+    .donnee {
+        width: 80%;
+        padding: 12px 20px;
+        border : 1px solid;
+    }
+    .checkin{
+        background-color:#477C9E;
+        color:white;
+        cursor:pointer;
+        width: 80%;
+        padding: 16px 20px;
+        border : 1px solid;
+        font-weight:bold;
+        margin-top:2%
+    }
+    .pt button{
+        background-color: ghostwhite;
+        padding: 0%;
+        outline: none;
+        cursor: pointer;
+        width:100%;
+        height:50px;
+        border-right:none;
+        border-top:none;
+        border-left:none;
+        }
+        .pt button:hover{
+            background-color:#DFEEF6;
+            height:50px;
+        }
+        #id_patient{
+            width: 90%;
+            padding: 12px 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-top: 10%;
+        }
+           table, th, td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+          }
+          th, td {
+            padding: 5px;
+            text-align: left;
+          }
+        .checkout{
+            background-color:#477C9E;
+            color:white;
+            float:right;
+            margin-right:35%;
+            cursor:pointer;
+        }
+        
+
+
+
+       
+

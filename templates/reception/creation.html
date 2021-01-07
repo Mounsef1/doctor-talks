@@ -1,0 +1,88 @@
+
+{% extends 'reception/check_in.html' %}
+{% block add_styles %}
+<style>
+    .tel {
+      display: none;
+      width: 100vw;
+    }
+    .pc {
+      display: flex;
+      width: 100vw;
+    }
+
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: ghostwhite;
+        font-family: Arial; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display : flex;
+     }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tel {
+          display: block;
+          margin:auto;
+          width: 100vw;
+        }
+        .pc {
+          display: none;
+          width: 100vw;
+        }
+      }
+   </style>
+{% endblock %}
+
+
+{% block content_d %}
+<div class="doc" style="margin-top:5%;margin-left:4%;vertical-align:middle;">
+    <form method="POST" >
+        {% csrf_token %}
+        <label>Nom du patient :</label>
+        <p><input type="text" class="donnee" id="nom" name="nom" placeholder="Nom"></p>
+        <span class="validity"></span>
+        <label>Prénom du patient :</label>
+        <p><input name="prenom" class="donnee" id="prenom" type="text"  placeholder="Prénom"  ></p>
+        <span class="validity"></span>
+        <label>CIN du patient :</label></p>
+        <p><input type="text" class="donnee" id="cin" name="CIN" placeholder="CIN"></p>
+        <span class="validity"></span>
+        <label>Date de naissance du patient :</label></p>
+        <p><input type="date" class="donnee" id="naissance" name="date_de_N" ></p>
+        <span class="validity"></span> 
+        <button class="checkin" style="font:bold;" type="submit" >Check in</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div style="background-color: #477C9E;height:100%;flex-basis:100%">
+    <a href="{% url 'reception' %}"><span style='font-size:50px;float:left;margin-top:0%;color:black'>&#8592;</span></a>        
+    <div style="text-align: center; padding-top:5%;padding-bottom:5%;letter-spacing: 10;">
+    <h1>Ajouter un patient</h1>
+    </div>
+    <div style="background-color: white;flex-basis:100%;border-radius:50px 50px 0px 0px;height:100%">
+        <div class="doc" style="margin-top:5%;text-align:left;margin-left:20%;">
+            <form method="POST">
+            {% csrf_token %}
+            <label>Nom du patient :</label>
+            <p><input type="text" class="donnee" id="nom" name="nom" placeholder="Nom"></p>
+            <span class="validity"></span>
+            <label>Prénom du patient :</label></p>
+            <p><input type="text" class="donnee" id="prenom" name="prenom" placeholder="Prénom"></p>
+            <span class="validity"></span>
+            <label>CIN du patient :</label></p>
+            <p><input type="text" class="donnee" id="cin" name="CIN" placeholder="CIN"></p>
+            <span class="validity"></span>
+            <label>Date de naissance du patient :</label></p>
+            <p><input type="date" class="donnee" id="naissance" name="date_de_N" ></p>
+            <span class="validity"></span>
+            <button class="checkin" type="submit" style="background-color:477C9E;width:80%">Check in</button>
+            </form>
+        </div>
+    </div>
+ </div>
+{% endblock %}

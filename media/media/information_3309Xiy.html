@@ -1,0 +1,126 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>DoctorTalk</title>
+    <link rel = "stylesheet"
+   type = "text/css"
+   href =  "/static/css/style2.css"/>
+</head>
+<body>
+    <div class = 'div1' style="flex-basis: 30%">
+        <div style="background-color:#477C9E;padding-bottom:5px;">
+        <a href="/search" style="float:left;"><img src="/static/images/loupe.png" alt="search" ></a>
+        <a href="/logout/" style="float:inline-block;"><img src="/static/images/bonhomme.png" alt="profile"></a>
+        <a href="/dashboard"style="float:right;"><img src="/static/images/home.png" alt="profile"></a>
+    </div>
+    
+    <div class="tab">
+        <button class="tablinks" onclick="openP(event,'Mes patients')" id="defaultOpen">Mes patients</button>
+        <button class="tablinks" onclick="openP(event,'Autres patients')">Autres patients</button>
+    </div>
+    <div id="Mes patients" class="tabcontent" style="padding-right:0%; padding-left:0%;">
+        
+        
+        <a href="/patient/1/information"><button class='patient_select' style="width:100%;" onclick="openD(event,'Patient')">
+            <h4 style="float:right; margin:0%">date</h4>
+            <h3>Amine Sdour</h3>
+        </button></a>
+        
+        
+        
+        <a href="/patient/2/information"><button class='patient_select' style="width:100%;" onclick="openD(event,'Patient')">
+            <h4 style="float:right; margin:0%">date</h4>
+            <h3>Nada Belguerne</h3>
+        </button></a>
+        
+        
+        
+        <a href="/patient/3/information"><button class='patient_select' style="width:100%;" onclick="openD(event,'Patient')">
+            <h4 style="float:right; margin:0%">date</h4>
+            <h3>Salim Selmani</h3>
+        </button></a>
+        
+        
+    </div>  
+    <div id="Autres patients" class="tabcontent" style="padding-right:0%; padding-left:0%;">
+    
+    
+    <a href="/patient/1/information"><button class='patient_select' style="width:100%;" onclick="openD(event,'Patient')">
+        <h4 style="float:right; margin:0%">date</h4>
+        <h3>Amine Sdour</h3>
+    </button></a>
+    
+    
+    
+    <a href="/patient/2/information"><button class='patient_select' style="width:100%;" onclick="openD(event,'Patient')">
+        <h4 style="float:right; margin:0%">date</h4>
+        <h3>Nada Belguerne</h3>
+    </button></a>
+    
+    
+    
+    <a href="/patient/3/information"><button class='patient_select' style="width:100%;" onclick="openD(event,'Patient')">
+        <h4 style="float:right; margin:0%">date</h4>
+        <h3>Salim Selmani</h3>
+    </button></a>
+    
+    
+    </div>  
+
+</div>
+<div class = 'div1' style="border-left: 2px solid black;">
+    
+
+    <div class="vide1">
+        <div class="settingsP">
+          <a href="#" style="float:left; margin-left:4px"><img src="/static/images/discussion.png"  alt="search" ></a>
+          <a href="/patient/1"><img src="/static/images/icons8-temps-100%402x.png" alt="profile"></a>
+          <a href="#" style="float:right; margin-right:4px"><img src="/static/images/information.png" alt="profile"></a>
+        </div>
+    </div>
+    <div>
+        
+            <li><a href="" download> fichier2</a>> fichier2</a></li>
+        
+            <li><a href="" download> fichier1</a>> fichier1</a></li>
+        
+    </div>
+
+</div>
+</body>
+</html>
+<script>
+    function openP(evt, malade) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(malade).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    
+    function openD(evt, Discuss) {
+      var i, tabcontent, tablinks;
+      /*tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }*/
+      tablinks = document.getElementsByClassName("patient_select");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      evt.currentTarget.className += " active";
+    }
+    document.getElementById("defaultOpen").click();
+    </script>

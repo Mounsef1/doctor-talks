@@ -1,0 +1,141 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard check in</title>
+    <link rel = "stylesheet"
+   type = "text/css"
+   href =  "{% static 'css\style2.css' %}"/>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   {% block add_styles %}
+    {% endblock %}
+</head>
+<style>
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 5px;
+        text-align: left;
+      }
+    .checkout{
+        background-color:#477C9E;
+        color:white;
+        float:right;
+        margin-right:35%;
+        cursor:pointer;
+    }
+    .tel {
+      display: none;
+      width: 100vw;
+    }
+    .pc {
+      display: flex;
+      width: 100vw;
+    }
+
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: ghostwhite;
+        font-family: Arial; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display : flex;
+     }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tel {
+          display: block;
+          margin:0%;
+          width: 100vw;
+        }
+        .pc {
+          display: none;
+          width: 100vw;
+        }}
+</style>
+<body>
+    <div class='pc'>
+        <div class = 'div1' style="flex-basis: 35%">
+        <div style="background-color:#477C9E;padding-bottom:5%;padding-top:3%">
+            <a href="{% url 'reception' %}" style="margin-left:5%; margin-right:15%;">
+            <button  class="reception" style="background-color:#477C9E;width:auto">check in</button></a>
+            <a href="{% url 'checkout' %}" style="margin-right:15%;">
+            <button  class="reception" style="background-color:#477C9E;width:auto;background-color: #9e7947;">check out</button></a>
+            <a href="{% url 'logout_url' %}" style="margin-right:5%"><i class="fa fa-sign-out" style="font-size:40px;color:black;"></i></a>
+        </div>
+        <div class="pt">
+            {% block content_g %}
+            {% if id_patient %}
+            <div>
+                {% for idd in id_patient %}
+                <a href="patient_info_p/{{ idd.patient.id }}">
+                    <button>
+                        <h3>{{idd.patient.first_name}} {{idd.patient.last_name}}</h3>
+                    </button></a>
+                {% endfor %}
+            </div>
+            {% else %}
+                <a href="/recherche_recep2/{{ 1 }}"><button><h3>Recherche par id</h3></button></a>
+                <a href="/recherche_recep2/{{ 2 }}"><button><h3>Recherche par nom</h3></button></a>
+                <a href="/recherche_recep2/{{ 3 }}"><button><h3>Recherche par CIN</h3></button></a>
+            {% endif %}
+            {% endblock %}
+        </div>
+        <div>{{message}}</div>
+
+        </div>
+        <div class = 'div1' style="border-left: 1px solid grey;flex-basis:65%"> 
+        {% block content_d %}
+        {% endblock %}
+        </div>
+    </div>  
+    <div class='tel'>
+        {% block content %}
+        <div style="background-color:#477C9E;padding-bottom:5%;padding-top:3%;text-align: center;">
+            <a href="{% url 'reception' %}" style="margin-left:5%; margin-right:15%;">
+               <button class="reception" style="background-color:#477C9E;width:20%;min-width: fit-content;">Check in</button></a>
+             <a href="{% url 'checkout' %}" style="margin-right:15%;">
+                <button class="reception" style="background-color:#477C9E;width:20%;min-width: fit-content;background-color: #9e7947;">Check out</button></a>
+                <a href="{% url 'logout_url' %}" style="margin-right:5%;margin-top:10%">
+              <i class="fa fa-sign-out" style="font-size:50px;color:black;"></i></a>
+            </div>
+            <div class="pt">
+                {% if id_patient %}
+                <div>
+                    {% for idd in id_patient %}
+                    <a href="patient_info_p/{{ idd.patient.id }}">
+                        <button>
+                            <h3>{{idd.patient.first_name}} {{idd.patient.last_name}}</h3>
+                        </button></a>
+                    <!--a href="/chekedin/{{ idd.id }}"><button type="submit">check in</button></a-->
+                    {% endfor %}
+                    </div>
+                {% else %}
+              <a href="/recherche_recep2/{{ 1 }}">
+                  <button >
+                <h3>Recherche par id</h3>
+              </button></a>
+              <a href="/recherche_recep2/{{ 2 }}">
+              <button >
+                <h3>Recherche par nom</h3>
+              </button></a> 
+              <a href="/recherche_recep2/{{ 3 }}">
+                <button >
+                  <h3>Recherche par CIN</h3>
+                </button></a>
+                {% endif %}
+        </div>
+        <div>{{ message }}</div>
+        {% endblock %}
+    </div>
+
+</body>
+</html> 

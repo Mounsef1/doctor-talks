@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content_g %}
+<div style="background-color:white;color:#477C9E;border-bottom:1px solid grey;margin:0%">
+  <h3 style="margin:0%;padding:3%">Mes patients</h3>
+</div>
+<div class="pt"> 
+    {% for salle in salle_dattente %}
+    {% if salle.doctor.user.username == user.username and salle.active_case %}
+    <a href="/patient/{{ salle }}"><button class='patient_select' style="width:100%;">
+        <h3>{{salle.malade.first_name }} {{salle.malade.last_name}}</h3>
+      </button></a>
+      <hr style='margin:0%'>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block content %}
+<div class = 'div1' id="gauche" style="flex-basis: 35%;width:100%">
+<div style="background-color:#477C9E;color:white;border-bottom:1px solid grey;margin:0%">
+  <h3 style="margin:0%;padding:3%">Mes patients</h3>
+  </div>
+  <div class="pt">
+    {% for salle in salle_dattente %}
+    {% if salle.doctor.user.username == user.username and salle.active_case %}
+    <a href="/patient/{{ salle }}"><button class='patient_select' style="width:100%;">
+        <h3>{{salle.malade.first_name }} {{salle.malade.last_name}}</h3>
+      </button></a>
+      <hr style='margin:0%'>
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+<div id="gauche" style="padding-bottom:3%;position:fixed;bottom:1%;width:100%;padding-top:3%">
+  <a href="/search" ><img src="{% static 'images\loupe.png' %}" alt="search"style="margin-right:17%;float:left;width:10%;" ></a>
+  <a href="/chat" ><img src="{% static 'images\discussion.png' %}"  alt="search"style="margin-right:17%;width:10%;" ></a>
+  <a href="/profile"><img src="{% static 'images\bonhomme.png' %}" alt="profile" style="margin-right:15%;width:10%;"></a>
+  <a href="/dashboard"><img src="{% static 'images\home.png' %}" alt="profile" style="float:right;width:12%;"></a>
+</div>
+{% endblock %}

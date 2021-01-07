@@ -1,0 +1,170 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block styles %}
+<style>
+  .tel {
+    display: none;
+    width: 100vw;
+  }
+  .pc {
+    display: flex;
+    width: 100vw;
+  }
+
+  @media only screen and (min-width: 768px) {
+    body {
+      background-color: ghostwhite;
+      font-family: Arial; 
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display : flex;
+   }
+  }
+
+  @media only screen and (max-width: 768px) {
+      .tel {
+        display: block;
+        width: 100vw;
+      }
+      .pc {
+        display: none;
+        width: 100vw;
+      }
+      #passages td, #passages th {
+        border: 2px solid #ddd;
+        padding: 8px; 
+      }
+    #passages th{
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #477C9E;
+
+    }
+    
+    }
+ </style>
+{% endblock %}
+
+{% block content_g %}
+    <div style="background-color:white;color:#477C9E;border-bottom:1px solid grey;margin:0%">
+      <h3 style="margin:0%;padding:3%">Mes patients</h3>
+    </div>
+    <div class="pt"> 
+        {% for salle in salle_dattente %}
+        {% if salle.doctor.user.username == user.username and salle.active_case == True %}
+        {% if salle.id == nbr %}
+        <a href="/patient/{{ salle }}">
+          <button  style="width:100%;background-color:#DFEEF6;">
+            <h3>{{salle.malade.first_name }} {{salle.malade.last_name}}</h3>
+        </button></a>
+        <hr style='margin:0%'>
+        {% else %}
+        <a href="/patient/{{ salle }}">
+          <button style="width:100%;background-color:ghostwhite;">
+          <h3>{{salle.malade.first_name }} {{salle.malade.last_name}}</h3>
+       </button></a>
+       <hr style='margin:0%'>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>  
+{% endblock %}
+
+
+{% block content_d %}
+    <div class="vide1">
+        <div class="settingsP">
+          <a href="#" style="margin-right:20%"><img src="{% static 'images\icons8-temps-100@2x.png' %}" alt="passage"></a>
+          <a href="/patient/{{ nbr }}/information" ><img src="{% static 'images\information.png' %}" alt="informations"></a>
+        </div>
+    </div>
+         <div class='div2' >
+          <p>Ajouter un passage.</p>
+          <form method="POST" >
+            {% csrf_token %}
+            <button class="button">+</button>
+        </form>
+         </div>
+         <div>
+          <table id="passages" style="width:40%;float:left;margin-top:5%;margin-left:10%">
+            <tr>
+             <th>Entrée :</th>
+           </tr>
+           {% for w in walk_test %}
+           {% if w.entrance.id == nbr and  w.act %}
+                       <tr>
+                        <td> {{w.temps_de_passage}}</td>
+                      </tr>
+           {% endif %}
+           {% endfor %}
+          </table>
+          <table id="passages" style="width:40%;float:right;margin-top:5%;margin-right:10%">
+            <tr>
+              <th>Sortie :</th>
+            </tr>
+            {% for w in walk_test %}
+           {% if w.entrance.id == nbr and not w.act %}
+                       <tr>
+                        <td> {{w.temps_de_passage}}</td>
+                      </tr>
+           {% endif %}
+           {% endfor %}
+           </table>
+          </div>
+{% endblock %}
+
+{% block content %}
+<div style="background-color:#477C9E;height:100%">
+  <a href="/dashboard">
+    <span style='font-size:50px;float:left;margin-top:0%;color:black'>&#8592;</span>
+  </a>
+<div style="text-align: center;padding-top:5%;padding-bottom:5%;letter-spacing: 10;">
+<h1>Mon patient</h1>
+</div>
+<div style="background-color: white;flex-basis:100%;border-radius:50px 50px 0px 0px;height:100%">
+  <div class="settingsP" style="height:100%">
+      <a href="#" style="float:left; margin-left:10%;margin-top:19%;">
+        <img src="{% static 'images\icons8-temps-100@2x.png' %}" alt="passages" style="height:70px;width:70px;">
+      </a>
+      <a href="/patient/{{ nbr }}/information" style="float:right; margin-right:10%;margin-top:20%;">
+        <img src="{% static 'images\information.png' %}" alt="info">
+      </a>
+      <div style="margin-top:50%;text-align:center">
+        <p>Ajouter un passage</p>
+        <form method="POST" >
+          {% csrf_token %}
+          <button class="button" style="background-color:#477C9E;margin-bottom:10%">+</button>
+        </form>
+      </div>
+      <table id="passages" style="width:40%;margin-left:10%;float:left">
+        <tr>
+         <th>Entrée :</th>
+       </tr>
+       {% for w in walk_test %}
+       {% if w.entrance.id == nbr and  w.act %}
+                   <tr>
+                    <td> {{w.temps_de_passage}}</td>
+                  </tr>
+       {% endif %}
+       {% endfor %}
+      </table>
+      <table id="passages" style="width:40%;float:right;margin-right:10%">
+        <tr>
+          <th>Sortie :</th>
+        </tr>
+        {% for w in walk_test %}
+       {% if w.entrance.id == nbr and not w.act %}
+                   <tr>
+                    <td> {{w.temps_de_passage}}</td>
+                  </tr>
+       {% endif %}
+       {% endfor %}
+       </table>
+  </div>
+</div>
+
+</div>
+
+{% endblock %}

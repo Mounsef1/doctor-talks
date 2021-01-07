@@ -1,0 +1,1 @@
+web: gunicorn doctorTalks.wsgi --log-file -

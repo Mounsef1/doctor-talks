@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>DoctorTalk</title>
+    <link rel = "stylesheet"
+   type = "text/css"
+   href =  "{% static 'css\style2.css' %}"/>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+  table, th, td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    .tel {
+      display: none;
+      width: 100vw;
+    }
+    .pc {
+      display: flex;
+      width: 100vw;
+    }
+
+
+    @media only screen and (min-width: 768px) {
+      body {
+        background-color: ghostwhite;
+        font-family: Arial; 
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display : flex;
+     }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .tel {
+          display: block;
+          margin:0%;
+          width: 100vw;
+        }
+        .pc {
+          display: none;
+          width: 100vw;
+        }
+        body {
+          background-color: ghostwhite;
+          font-family: Arial; 
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          display : flex;
+      
+       }
+      
+      img{
+          width: 50px;
+          height: 50px;
+      }
+      .div1{
+          display: inline-block;
+          text-align: center;
+          flex-basis:100%;
+      }
+    
+      .button{
+          background-color:#477C9E;
+          color: white;
+          margin-top:0%;
+      }
+      
+      .div2 button:hover{
+         cursor:pointer;
+      }
+      .settings{
+          background-color:#477C9E;
+      }
+      
+      .settingsP{
+          padding-top: 3%;
+          border-bottom: 1px solid Grey;
+          padding-bottom:2%;
+      }
+      
+      }
+      
+</style>
+{% block styles %}
+{% endblock %}
+
+<body>
+  <div class="pc">
+    <div class = 'div1'  id="gauche" style="flex-basis: 35%">
+        <div class='settings' style="padding-top:3%;padding-bottom: 5%;">
+        <a href="/search" style="margin-right:15%"><img src="{% static 'images\loupe.png' %}" alt="ajouter" ></a>
+        <a href="/chat" style="margin-right:15%"><img src="{% static 'images\discussion.png' %}"  alt="disscussion" ></a>
+        <a href="/profile" style="margin-right:15%"><img src="{% static 'images\bonhomme.png' %}" alt="profile"></a>
+        <a href="/dashboard"><img src="{% static 'images\home.png' %}" alt="dashboard"></a>
+    </div>
+    {% block content_g %}{% endblock %}
+</div>
+<div class = 'div1' style="border-left: 1px solid grey ; flex-basis: 65%">
+  {% block content_d %}{% endblock %}
+</div>
+</div>
+<div class="tel">
+
+    {% block content %}{% endblock %}
+
+</div>
+</body>
+</html>

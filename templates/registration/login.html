@@ -1,0 +1,35 @@
+{% load static %}
+
+<html>
+<head>
+    <title>login DoctorTalks</title>
+    <link rel = "stylesheet"
+    type = "text/css"
+    href =  "{% static 'css\style1.css' %}"/>
+</head>
+
+   <body>
+       <div class='div1'>
+            <h1>
+                Identifiez-vous
+            </h1>
+            <h2>
+                Connectez-vous à DoctorTalks
+            </h2>
+            <img src="{% static 'images\image app.png'%}" id="imagetel" alt="photo" >
+            <form  method="post" action="{% url 'login' %}" role="form" action="/">
+                {% csrf_token %}
+                <p><input type="text" class="identifiant" name="username" placeholder="Utilisateur"></p>
+                <p><input type="password" class="identifiant" name="password" placeholder="Mot de passe"></p>
+                <input type="submit" id="loginBtn" value="Connexion" >     
+            </form>
+            <label>{{ info }}</label>
+    </div>
+    <div class='div1'id="web" style="border-left: 2px solid grey;margin-top:5%; margin-bottom:5%;">
+        <h3>
+           DoctorTalks
+        </h3>
+     <img src="{% static 'images\image app.png'%}" id="imagepc" alt="photo" width="100%">
+  </div>    
+    </body>
+</html>
